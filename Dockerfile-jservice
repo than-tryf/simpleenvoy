@@ -1,5 +1,5 @@
 
-FROM lyft/envoy:latest
+FROM envoyproxy/envoy:latest
 MAINTAINER Thanasis Tryfonos <thanasistryfonos@gmail.com>
 RUN apt-get update \
  && apt-get -y install software-properties-common
@@ -10,9 +10,10 @@ RUN \
   apt-get install -y oracle-java8-installer && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
-
+COPY envoy_jservice.json /etc/envoy.json
 COPY start_jservice.sh /home/start_jservice.sh
 RUN chmod +x /home/start_jservice.sh
 COPY service1-0.0.1-SNAPSHOT.jar /home/service1-0.0.1-SNAPSHOT.jar
 EXPOSE 8001
-ENTRYPOINT ["/home/start_jservice.sh"]
+# ENTRYPOINT ["/home/start_jservice.sh"]
+CMD /usr/local/bin/envoy -c /etc/envoy.json --service-cluster jservice
