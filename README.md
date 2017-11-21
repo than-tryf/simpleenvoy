@@ -1,1 +1,1 @@
-``` docker build --rm -t jservice . -f Dockerfile-jservicegit
+``` docker build --rm -t jservice . -f Dockerfile-jservicegit ```
