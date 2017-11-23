@@ -14,8 +14,8 @@ docker network create -d bridge envoymesh
 
 # Run Containers
 docker run -d -p 8000:80 -p 9001:9001 --network=envoymesh --net-alias=frontenvoy --name front-envoy front-envoy
-docker run -d -p 8100:80 --network=envoymesh --net-alias=jservice --name jservice jservice
-docker run -d -p 8200:80 --network=envoymesh --net-alias=goservice --name goservice goservice
+docker run -d --network=envoymesh --net-alias=jservice --name jservice jservice
+docker run -d --network=envoymesh --net-alias=goservice --name goservice goservice
 
 # docker run -d -p 8000:80 -p 9001:9001 --net=host  --name front-envoy front-envoy
 # docker run -d -p 8100:80 --net=host  --name jservice jservice

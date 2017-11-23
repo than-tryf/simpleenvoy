@@ -48,10 +48,10 @@
         "features": "http2",
         "hosts": [
           {
-            "url": "tcp://jservice:80/service"
+            "url": "tcp://jservice:80"
           },
           {
-            "url": "tcp://goservice:80/service"
+            "url": "tcp://goservice:80"
           }
         ]
       }
