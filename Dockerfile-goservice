@@ -5,5 +5,6 @@ COPY start_goservice.sh /home/start_goservice.sh
 COPY serviceingo /home/serviceingo
 COPY go-envoy.json /etc/envoy.json
 RUN chmod +x /home/start_goservice.sh
+EXPOSE 80
 ENTRYPOINT ["/home/start_goservice.sh"]
 #CMD /usr/local/bin/envoy -c /etc/envoy.json
