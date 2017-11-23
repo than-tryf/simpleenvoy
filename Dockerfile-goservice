@@ -1,0 +1,9 @@
+FROM envoyproxy/envoy:latest
+RUN apt-get -y update
+RUN apt-get install -y curl
+COPY start_goservice.sh /home/start_goservice.sh
+COPY serviceingo /home/serviceingo
+COPY go-envoy.json /etc/envoy.json
+RUN chmod +x /home/start_goservice.sh
+ENTRYPOINT ["/home/start_goservice.sh"]
+#CMD /usr/local/bin/envoy -c /etc/envoy.json
