@@ -1,0 +1,76 @@
+{
+  "listeners": [
+    {
+      "address": "tcp://0.0.0.0:80",
+      "filters": [
+        {
+          "name": "http_connection_manager",
+          "config": {
+            "codec_type": "auto",
+            "stat_prefix": "ingress_http",
+            "route_config": {
+              "virtual_hosts": [
+                {
+                  "name": "backend",
+                  "domains": ["*"],
+                  "routes": [
+                    {
+                      "prefix": "/service",
+                      "weighted_clusters" : {
+                        "clusters": [
+                          {
+                            "name" : "jservice",
+                            "weight": 20
+                          },
+                          {
+                            "name" : "goservice",
+                            "weight": 80
+                          }
+                        ]
+                      },
+                      "timeout_ms": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            "filters": [
+              {
+                "name": "router",
+                "config": {}
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "admin": {
+    "access_log_path": "/dev/null",
+    "address": "tcp://0.0.0.0:9010"
+  },
+  "cluster_manager": {
+    "clusters": [
+      {
+        "name": "jservice",
+        "type": "strict_dns",
+        "connect_timeout_ms": 250,
+        "lb_type": "least_request",
+        "hosts": [
+          {"url": "tcp://jservice:80"}
+        ],
+        "features": "http2"
+      },
+      {
+        "name": "goservice",
+        "type": "strict_dns",
+        "connect_timeout_ms": 250,
+        "lb_type": "least_request",
+        "hosts": [
+          {"url": "tcp://goservice:80"}
+        ],
+        "features": "http2"
+      }
+    ]
+  }
+}
