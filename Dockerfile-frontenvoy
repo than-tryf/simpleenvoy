@@ -1,5 +1,5 @@
 FROM envoyproxy/envoy:latest
 RUN apt-get -y update
-RUN apt-get install -y curl  
+RUN apt-get install -y curl
 COPY front-envoy.json /etc/envoy.json
 CMD /usr/local/bin/envoy -c /etc/envoy.json
