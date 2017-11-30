@@ -26,4 +26,4 @@ Some info taken from [Istio](https://istio.io/) ??
 * [Weighted Load Balancing](https://www.envoyproxy.io/docs/envoy/latest/configuration/http_conn_man/route_config/route.html?highlight=weight#config-http-conn-man-route-table-route-weighted-clusters)
 
 # Start Now!
-[Use the templates& instructions to start creating your own containers with Envoy support](templates/README.md)
+[Use the templates& instructions to start creating your own containers with Envoy support](templates/)
