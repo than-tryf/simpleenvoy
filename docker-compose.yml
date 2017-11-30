@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  goservice:
+    build:
+      context: .
+      dockerfile: Dockerfile-goservice
+    networks:
+      envoymesh:
+        aliases:
+          - goservice
+    expose:
+      - "80"
+
+  jservice:
+    build:
+      context: .
+      dockerfile: Dockerfile-jservice
+    networks:
+      envoymesh:
+        aliases:
+          - jservice
+    expose:
+      - "80"
+
+  front-envoy:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontenvoy
+    networks:
+      - envoymesh
+    expose:
+      - "80"
+      - "9001"
+    ports:
+      - "8000:80"
+      - "9001:9001"
+
+networks:
+  envoymesh: {}
